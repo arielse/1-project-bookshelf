@@ -1,1 +1,32 @@
 CREATE DATABASE bookshelf;
+
+CREATE TABLE users (
+  id SERIAL4 PRIMARY KEY,
+  username VARCHAR(25) NOT NULL,
+  email VARCHAR(200) NOT NULL,
+  password_digest VARCHAR(400) NOT NULL,
+  reviews INTEGER,
+  shelf INTEGER
+);
+
+CREATE TABLE books (
+  id SERIAL4 PRIMARY KEY,
+  title VARCHAR(500) NOT NULL,
+  author VARCHAR(400) NOT NULL,
+  isbn VARCHAR(200) NOT NULL,
+  cover_img VARCHAR(400),
+  reviews INTEGER
+);
+
+CREATE TABLE shelves (
+  id SERIAL4 PRIMARY KEY,
+  book_id INTEGER NOT NULL,
+  user_id INTEGER NOT NULL
+);
+
+CREATE TABLE reviews (
+  id SERIAL4 PRIMARY KEY,
+  review_body VARCHAR(2000) NOT NULL,
+  user_id INTEGER NOT NULL,
+  book_id INTEGER NOT NULL
+);
