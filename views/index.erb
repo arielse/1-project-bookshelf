@@ -1,1 +1,7 @@
+<h1>Book Shelf</h1>
 
+<a href="/book-search">Search for a book</a>
+<% if !logged_in? %>
+<a href="/login">Login</a>
+<a href="/register">Register</a>
+<% end %>

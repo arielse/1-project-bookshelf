@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="public/stylesheets/main.css">
   </head>
   <body>
+    <header>
+      <form action="/session" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit" name="button">Logout</button>
+      </form>
+    </header>
     <%= yield %>
   </body>
 </html>
