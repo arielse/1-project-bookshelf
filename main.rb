@@ -8,3 +8,13 @@ require_relative "models/user"
 require_relative "models/review"
 require_relative "models/book"
 require_relative "models/shelf"
+
+get '/' do
+
+  erb :index
+end
+
+get '/login' do
+
+  erb :login
+end
