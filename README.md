@@ -9,3 +9,8 @@ password: fortytwo
 username: zaphod
 email: beeblebrox@galacticpresident.gov
 password: trillian
+
+### User three:
+username: trillian
+email: tricia.mcmillan@gmail.com
+password: adventure

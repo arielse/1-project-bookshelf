@@ -32,3 +32,5 @@ CREATE TABLE reviews (
   FOREIGN KEY (book_id) REFERENCES books (id),
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
+
+ALTER TABLE users ADD COLUMN about_user VARCHAR(1000);

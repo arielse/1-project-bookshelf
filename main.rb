@@ -3,6 +3,7 @@ require "sinatra/reloader"
 # PG is the library used to do commands in PostGreSQL like "conn" below
 require "pg"
 require "pry"
+require "httparty"
 require_relative "db_config"
 require_relative "models/user"
 require_relative "models/review"
@@ -50,8 +51,47 @@ post '/session' do
   end
 end
 
+# logout
 delete '/session' do
   # deletes the session id, which logs the person out
   session[:user_id] = nil
-  redirect '/login'
+  redirect '/'
+end
+
+get '/register' do
+  erb :register
+end
+
+post '/register' do
+  if User.find_by(email: params[:email])
+    @message = 'email address already in use'
+    erb :register
+  else
+    User.create(username: params[:username], email: params[:email], password: params[:password])
+    redirect '/login'
+  end
+end
+
+get '/userinfo' do
+  @username = current_user.username
+  @about_user = current_user.about_user
+  erb :userinfo
+end
+
+get '/edit_userinfo' do
+  @username = current_user.username
+  @about_user = current_user.about_user
+  erb :edit_userinfo
+end
+
+put '/edit_userinfo' do
+  @user = current_user
+  @user.about_user = params[:about_me]
+  @user.save
+  redirect '/userinfo'
+end
+
+get '/booksearch' do
+  @book_found = Book.find_by(title: params[:book_title])
+  erb :booksearch
 end
