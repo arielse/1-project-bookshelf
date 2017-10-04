@@ -5,8 +5,7 @@ CREATE TABLE users (
   username VARCHAR(25) NOT NULL,
   email VARCHAR(200) NOT NULL,
   password_digest VARCHAR(400) NOT NULL,
-  reviews INTEGER,
-  shelf INTEGER
+  image VARCHAR(200)
 );
 
 CREATE TABLE books (
@@ -14,19 +13,22 @@ CREATE TABLE books (
   title VARCHAR(500) NOT NULL,
   author VARCHAR(400) NOT NULL,
   isbn VARCHAR(200) NOT NULL,
-  cover_img VARCHAR(400),
-  reviews INTEGER
+  cover_img VARCHAR(400)
 );
 
 CREATE TABLE shelves (
   id SERIAL4 PRIMARY KEY,
   book_id INTEGER NOT NULL,
-  user_id INTEGER NOT NULL
+  user_id INTEGER NOT NULL,
+  FOREIGN KEY (book_id) REFERENCES books (id),
+  FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 CREATE TABLE reviews (
   id SERIAL4 PRIMARY KEY,
-  review_body VARCHAR(2000) NOT NULL,
+  review_body VARCHAR(4000) NOT NULL,
+  book_id INTEGER NOT NULL,
   user_id INTEGER NOT NULL,
-  book_id INTEGER NOT NULL
+  FOREIGN KEY (book_id) REFERENCES books (id),
+  FOREIGN KEY (user_id) REFERENCES users (id)
 );
