@@ -1,0 +1,9 @@
+<h2>Search Results</h2>
+<ul>
+  <% @book_search.each { |book|   %>
+    <li><form class="" action="/bookabout<%=@book%>" method="get">
+      <input type="hidden" name="book_selected" value="<%=book.title%>">
+      <button type="submit" name="button"><%=book.title%></button>
+    </form></a></li>
+  <% } %>
+</ul>

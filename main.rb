@@ -92,6 +92,33 @@ put '/edit_userinfo' do
 end
 
 get '/booksearch' do
-  @book_found = Book.find_by(title: params[:book_title])
+
   erb :booksearch
+end
+
+get '/booklist' do
+  input_title = params[:book_title]
+  title = Book.arel_table[:title]
+  @book_search = Book.where(title.matches("%#{input_title}%"))
+  @book = params[:book_selected]
+  erb :booklist
+end
+
+get "/bookabout#{@book}" do
+  @book = params[:book_selected]
+  @book_found = Book.find_by(title: @book)
+  @user = current_user
+  erb :bookabout
+end
+
+post "/bookshelf" do
+  @user = current_user
+  Shelf.create(book_id: params[:book_id], user_id: params[:user_id])
+  @usershelf = params[:user_id]
+  redirect "/bookshelf"
+end
+get "/bookshelf" do
+  @usershelf = Shelf.where(user_id: current_user)
+
+  erb :bookshelf
 end

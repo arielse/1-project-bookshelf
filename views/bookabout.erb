@@ -1,0 +1,13 @@
+<img src="<%= @book_found.cover_img %>" alt="">
+<p><%= @book_found.title %></p>
+<p><%= @book_found.author %></p>
+<p><%= @book_found.blurb %></p>
+
+<% if logged_in? %>
+
+<form class="" action="/bookshelf" method="post">
+  <input type="hidden" name="book_id" value="<%=@book_found.id%>">
+  <input type="hidden" name="user_id" value="<%=@user.id%>">
+  <button type="submit" name="button">Add book to shelf</button>
+</form>
+<% end %>

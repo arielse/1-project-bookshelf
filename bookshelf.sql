@@ -34,3 +34,4 @@ CREATE TABLE reviews (
 );
 
 ALTER TABLE users ADD COLUMN about_user VARCHAR(1000);
+ALTER TABLE books ADD COLUMN blurb VARCHAR(1000);
