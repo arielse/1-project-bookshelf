@@ -1,5 +1,12 @@
-<%= @usershelf.each {|book|%>
-<div class="book-shelf-item">
-  <img src="<%= %>" alt="">
-</div>
-<%}%>
+<section id="bookshelf">
+  <h2><%=@user.username%>'s Shelf</h2>
+  <% @usershelf.each {|book| %>
+  <div class="book-shelf-item">
+    <% book_item = Book.find_by(id: book.book_id) %>
+    <img src="<%=book_item.cover_img%>" alt="<%=book_item.title%>" width="200">
+    <p class="shelf-title"><%= book_item.title %></p>
+    <p class="shelf-author"><%= book_item.author %></p>
+    <a href="/bookabout?book_selected=<%=book_item.title%>" class='about-button'>View Book Details</a>
+  </div>
+  <%}%>
+</section>

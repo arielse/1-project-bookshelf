@@ -3,18 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>Book Shelf</title>
-    <link rel="stylesheet" href="public/stylesheets/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/main.css">
   </head>
   <body>
     <header>
+      <a href="/"><h1>The Book Shelf</h1></a>
       <nav>
-        <a href="/">HOME</a>
-
+        <% if !logged_in? %>
+        <a href="/booksearch">Book Search</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+        <% else %>
+          <a href="/booksearch">Book Search</a>
+          <a href="/userinfo">Profile Page</a>
+          <a href="/bookshelf">My Shelf</a>
+          <a href="#"><form action="/session" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" name="button">Logout</button>
+          </form></a>
+        <% end %>
       </nav>
-      <form action="/session" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <button type="submit" name="button">Logout</button>
-      </form>
+
     </header>
     <%= yield %>
   </body>

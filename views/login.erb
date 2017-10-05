@@ -1,14 +1,14 @@
-<h2>Login</h2>
-<%= @message %>
-<form class="" action="/session" method="post">
-  <label for="">username</label>
-  <input type="text" name="username" value="">
+<section id="login">
+  <h2>Login</h2>
+  <p class="<%=@message%>">Email or Password incorrect</p>
+  <form class="" action="/session" method="post">
 
-  <label for="">email</label>
-  <input type="text" name="email" value="">
+    <label for="">Email</label>
+    <input type="text" name="email" value="" placeholder="Enter Email...">
 
-  <label for="">password</label>
-  <input type="password" name="password" value="">
+    <label for="">Password</label>
+    <input type="password" name="password" value="" placeholder="Enter Password...">
 
-  <button type="submit" name="button">Login</button>
-</form>
+    <button type="submit" name="button">Login</button>
+  </form>
+</section>

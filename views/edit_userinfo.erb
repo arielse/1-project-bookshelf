@@ -1,10 +1,14 @@
-<img src="http://via.placeholder.com/200x200" alt="user image" height="200" width="200">
-<h2><%= @username %></h2>
-<h3>About Me:</h3>
-<p><%= @about_user %></p>
+<section id="edit_userinfo">
+  <img src="http://via.placeholder.com/200x300" alt="user image" height="300" width="200">
+  <div class="userinfo">
+    <h2><%= @username %></h2>
+    <h3>About Me:</h3>
+    <p><%= @about_user %></p>
+  </div>
 
-<form class="" action="/edit_userinfo" method="post">
-  <input type="hidden" name="_method" value="put">
-  <textarea name="about_me" rows="8" cols="80" placeholder="write a short description of yourself..."></textarea>
-  <button type="submit" name="button">Submit</button>
-</form>
+  <form class="edit-info" action="/edit_userinfo" method="post">
+    <input type="hidden" name="_method" value="put">
+    <textarea name="about_me" rows="8" cols="80" placeholder="Write a short description of yourself..."></textarea>
+    <button type="submit" name="button">Submit</button>
+  </form>
+</section>

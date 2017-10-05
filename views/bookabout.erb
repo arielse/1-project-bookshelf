@@ -1,13 +1,43 @@
-<img src="<%= @book_found.cover_img %>" alt="">
-<p><%= @book_found.title %></p>
-<p><%= @book_found.author %></p>
-<p><%= @book_found.blurb %></p>
+<section id="bookabout">
+  <img src="<%= @book.cover_img %>" alt="">
+  <div class="bookinfo">
+    <h2><%= @book.title %></h2>
+    <p class="author"><%= @book.author %></p>
+    <p><%= @book.blurb %></p>
+    <% if logged_in? %>
+      <% if @onshelf %>
+      <form class="" action="/bookshelf" method="post">
+        <input type="hidden" name="book_id" value="<%=@book.id%>">
+        <input type="hidden" name="user_id" value="<%=@user.id%>">
+        <button type="submit" name="button">Add book to shelf</button>
+      </form>
+      <% end %>
+    <% end %>
+  </div>
 
-<% if logged_in? %>
+</section>
 
-<form class="" action="/bookshelf" method="post">
-  <input type="hidden" name="book_id" value="<%=@book_found.id%>">
-  <input type="hidden" name="user_id" value="<%=@user.id%>">
-  <button type="submit" name="button">Add book to shelf</button>
-</form>
-<% end %>
+<section id="reviews">
+  <% if @reviews.length > 0 %>
+    <h3>User Reviews:</h3>
+
+    <% @reviews.each { |review| %>
+      <% reviewer = User.find(review.user_id) %>
+    <div class="review">
+      <p class="review-username"><%= reviewer.username %></p>
+      <p><%= review.review_body %></p>
+    </div>
+    <% } %>
+    <% else %>
+    <h3>There are no reviews for this book</h3>
+  <% end %>
+
+  <% if logged_in? %>
+  <h3 class="review-heading">Leave a review:</h3>
+  <form class="review-form" action="/write_review" method="post">
+    <input type="hidden" name="book_id" value="<%=@book.id%>">
+    <textarea name="review_body" rows="8" cols="85" placeholder="Write your review here"></textarea>
+    <button type="submit" name="button">Review it!</button>
+  </form>
+  <% end %>
+</section>

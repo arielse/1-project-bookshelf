@@ -1,5 +1,5 @@
 require "sinatra"
-# require "sinatra/reloader"
+require "sinatra/reloader"
 # PG is the library used to do commands in PostGreSQL like "conn" below
 require "pg"
 require "pry"
@@ -17,6 +17,7 @@ helpers do
   def current_user
     User.find_by(id: session[:user_id])
   end
+
   def logged_in?
     if current_user
       true
@@ -32,7 +33,7 @@ get '/' do
 end
 
 get '/login' do
-  @message = ''
+  @message = 'none'
   erb :login
 end
 
@@ -46,7 +47,7 @@ post '/session' do
     session[:user_id] = user.id
     redirect '/'
   else
-    @message = 'incorrect email or password'
+    @message = 'login-error'
     erb :login
   end
 end
@@ -59,12 +60,13 @@ delete '/session' do
 end
 
 get '/register' do
+  @message = 'none'
   erb :register
 end
 
 post '/register' do
   if User.find_by(email: params[:email])
-    @message = 'email address already in use'
+    @message = 'register-error'
     erb :register
   else
     User.create(username: params[:username], email: params[:email], password: params[:password])
@@ -104,21 +106,29 @@ get '/booklist' do
   erb :booklist
 end
 
-get "/bookabout#{@book}" do
-  @book = params[:book_selected]
-  @book_found = Book.find_by(title: @book)
+get '/bookabout' do
+  @book = Book.find_by(title: params[:book_selected])
   @user = current_user
+  @reviews = Review.where(book_id: @book.id)
+  @onshelf = Shelf.where(user_id: @user.id, book_id: @book.id)
   erb :bookabout
 end
 
-post "/bookshelf" do
+post '/bookshelf' do
   @user = current_user
   Shelf.create(book_id: params[:book_id], user_id: params[:user_id])
   @usershelf = params[:user_id]
   redirect "/bookshelf"
 end
-get "/bookshelf" do
-  @usershelf = Shelf.where(user_id: current_user)
 
+get '/bookshelf' do
+  @user = current_user
+  @usershelf = Shelf.where(user_id: current_user)
   erb :bookshelf
+end
+
+post '/write_review' do
+  @user = current_user
+  Review.create(review_body: params[:review_body], book_id:   params[:book_id], user_id: @user.id)
+  redirect '/bookshelf'
 end

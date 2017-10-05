@@ -1,9 +1,14 @@
-<h2>Search Results</h2>
-<ul>
-  <% @book_search.each { |book|   %>
-    <li><form class="" action="/bookabout<%=@book%>" method="get">
-      <input type="hidden" name="book_selected" value="<%=book.title%>">
-      <button type="submit" name="button"><%=book.title%></button>
-    </form></a></li>
-  <% } %>
-</ul>
+<section id="booklist">
+  <h2>Search Results</h2>
+    <% @book_search.each { |book|   %>
+      <div class="book-list-item">
+        <a href="/bookabout?book_selected=<%=book.title%>">
+          <img src="<%=book.cover_img%>" alt="<%=book.title%>" width="200">
+          <p><%=book.title%></p>
+          <p><%=book.author%></p>
+        </a>
+      </div>
+
+
+    <% } %>
+</section>
