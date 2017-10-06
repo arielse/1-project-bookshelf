@@ -45,7 +45,7 @@ post '/session' do
   if user && user.authenticate(params[:password])
     # successful create session then redirect1
     session[:user_id] = user.id
-    redirect '/'
+    redirect '/bookshelf'
   else
     @message = 'login-error'
     erb :login
@@ -110,7 +110,6 @@ get '/bookabout' do
   @book = Book.find_by(title: params[:book_selected])
   @user = current_user
   @reviews = Review.where(book_id: @book.id)
-  @onshelf = Shelf.where(user_id: @user.id, book_id: @book.id)
   erb :bookabout
 end
 

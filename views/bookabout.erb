@@ -5,13 +5,11 @@
     <p class="author"><%= @book.author %></p>
     <p><%= @book.blurb %></p>
     <% if logged_in? %>
-      <% if @onshelf %>
       <form class="" action="/bookshelf" method="post">
         <input type="hidden" name="book_id" value="<%=@book.id%>">
         <input type="hidden" name="user_id" value="<%=@user.id%>">
         <button type="submit" name="button">Add book to shelf</button>
       </form>
-      <% end %>
     <% end %>
   </div>
 
