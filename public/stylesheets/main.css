@@ -12,7 +12,7 @@ body {
 section {
   margin-top: 40px;
 }
-button, .about-button, .shelf-button, .edit-about {
+button, .about-button, .shelf-button, .edit-about, .home-login, .home-register {
   background-color: #e24342;
   color: #fff;
   border: none;
@@ -40,8 +40,14 @@ h1 {
   font-size: 40px;
   vertical-align: middle
 }
+
 h2 {
   font-size: 30px;
+}
+.start-prompt {
+  color: #e24342;
+  font-weight: 700;
+  font-size: 35px;
 }
 nav {
   display: inline-block;
@@ -70,8 +76,18 @@ header {
   background-color: #66b9bf;
   padding: 20px 0 20px 40px;
 }
-
-#booksearch input {
+#welcome {
+  width: 70%;
+  margin: 40px auto;
+}
+#welcome p {
+  font-weight: 700;
+}
+#welcome h1 {
+  color: #373737;
+  margin-bottom: 20px;
+}
+#booksearch input, #home-booksearch input {
   padding: 10px 0 10px 10px;
   width: 405px;
   border: 3px solid #66b9bf;
@@ -79,7 +95,7 @@ header {
   font-size: 18px;
 
 }
-#booksearch button {
+#booksearch button, #home-booksearch button {
   display: block;
   margin: 0 auto;
   margin-top: 20px;
@@ -213,4 +229,27 @@ header {
 }
 .review-heading {
   margin-top: 40px;
+}
+#home-booksearch {
+  width: 40%;
+  margin: 40px auto;
+  background-color: #ddd;
+  border: 3px solid #ccc;
+  border-radius: 10px;
+}
+.login-register {
+  margin-bottom: 40px;
+}
+
+.home-login, .home-register {
+  margin: 20px 10px;
+}
+.home-login, .home-register, #home-booksearch button {
+  background-color: #66b9bf;
+  border-radius: 5px;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+#home-booksearch button {
+  letter-spacing: 2px;
 }

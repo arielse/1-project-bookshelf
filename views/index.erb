@@ -1,7 +1,22 @@
-<h2>Welcome to The Book Shelf</h2>
+<section id="welcome">
+  <h1>Welcome to The Book Shelf</h1>
+  <p>Hello there! The Book Shelf is your own personal way to keep track of the books you're reading. You can search for books, write reviews, and add books to your shelf. You can also see other users reviews of any book you search. Have fun!</p>
+</section>
 
-<a href="/booksearch">Search for a book</a>
-<% if !logged_in? %>
-<a href="/login">Login</a>
-<a href="/register">Register</a>
-<% end %>
+<section id="home-booksearch">
+  <h2 class="start-prompt">Get Started!</h2>
+  <h2>Search for a book by its title</h2>
+  <form action="/booklist" method="get">
+    <input type="text" name="book_title" placeholder="Search title here...">
+    <button type="submit">Search</button>
+  </form>
+  <%= @message %>
+
+  <% if !logged_in? %>
+  <div class="login-register">
+    <h2 class="start-prompt">OR</h2>
+    <a href="/login" class="home-login">Login</a>
+    <a href="/register" class="home-register">Register</a>
+  </div>
+  <% end %>
+</section>
